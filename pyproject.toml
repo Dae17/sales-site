@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "sales"
+version = "0.1.0"
+description = ""
+authors = ["Carson Weeks <mail@carsonweeks.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+Django = "^4.1"
+django-vite = "^2.0.2"
+gunicorn = "^20.1.0"
+whitenoise = "^6.2.0"
+shortuuid = "^1.0.8"
+django-browser-reload = "^1.6.0"
+django-widget-tweaks = "^1.4.12"
+
+[tool.poetry.group.dev.dependencies]
+djhtml = "^1.5.2"
+black = {version = "^22.8.0", allow-prereleases = true}
+isort = "^5.10.1"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"

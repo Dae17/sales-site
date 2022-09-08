@@ -1,0 +1,23 @@
+{% load django_vite %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="winter">
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock title %}</title>
+        <link rel="shortcut icon" type="image/png" href="{% static 'favicon.ico' %}" />
+        {% vite_hmr_client %}
+        {% vite_asset 'src/main.js' %}
+    </head>
+
+    <body>
+
+        {% block content %}
+        
+        
+        {% endblock content %}
+    </body>
+
+</html>
