@@ -13,6 +13,8 @@ whitenoise = "^6.2.0"
 shortuuid = "^1.0.8"
 django-browser-reload = "^1.6.0"
 django-widget-tweaks = "^1.4.12"
+django-crispy-forms = "^1.14.0"
+crispy-bootstrap5 = "^0.7"
 
 [tool.poetry.group.dev.dependencies]
 djhtml = "^1.5.2"
