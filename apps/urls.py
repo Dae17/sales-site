@@ -5,4 +5,5 @@ app_name = "apps"
 
 urlpatterns = [
     path("", include("apps.users.urls")),
+    path("listing/", include("apps.listing.urls"))
 ]
