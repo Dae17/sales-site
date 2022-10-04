@@ -1,3 +1,4 @@
+import operator
 from django.shortcuts import render
 from django.http import HttpResponse
 
@@ -9,7 +10,9 @@ from django.views.generic.edit import FormView
 
 def index(request):
     objs = item.objects.all()
-    return render(request, 'listing/index.html', {"items": objs})
+    ordered = sorted(objs, key=operator.attrgetter('price'))
+    # return render(request, 'polls/index.html', {"items":  orderer_item})
+    return render(request, 'listing/index.html', {"items": ordered})
 
 def detail(request, id):
     obj = item.objects.get(pk=id)
