@@ -1,0 +1,16 @@
+{% extends "__base.html" %}
+{% block content %}
+    <div>
+        <h1>Login</h1>
+        <form method="post">
+            {% csrf_token %}
+            {% for field in login_form.visible_fields %}
+                <div class="form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <button class="btn btn-primary" type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}
