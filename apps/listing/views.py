@@ -15,7 +15,7 @@ def detail(request, id):
     obj = item.objects.get(pk=id)
     return HttpResponse(obj.item_name)
 
-
+# https://docs.djangoproject.com/en/4.1/topics/forms/
 # https://docs.djangoproject.com/en/4.1/topics/class-based-views/generic-editing/
 class create(FormView):
     template_name = 'listing/create.html'
