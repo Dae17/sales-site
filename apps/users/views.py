@@ -47,4 +47,4 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
-    return redirect(reverse("apps:index"))
+    return redirect(reverse("apps:listing:list"))
