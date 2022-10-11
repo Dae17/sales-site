@@ -6,6 +6,7 @@ from .models import item
 
 from django.views.generic.edit import CreateView
 
+from django.contrib.messages.views import SuccessMessageMixin
 
 
 
@@ -19,10 +20,12 @@ def detail(request, id):
     obj = item.objects.get(pk=id)
     return HttpResponse(obj.item_name)
 
-class ItemCreateView(CreateView):
+class ItemCreateView(SuccessMessageMixin, CreateView):
     model = item
     fields = ['item_name', 'price', 'item_discription']
     template_name = 'listing/create.html'
+    success_message = "'%(item_name)s' was created successfully"
+
 
     def form_valid(self, form):
         listing = form.save(commit=False)
