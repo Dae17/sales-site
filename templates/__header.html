@@ -18,9 +18,9 @@
           <a class="nav-link" href="{% url 'apps:create' %}"><i class="bi bi-plus-circle"></i> List Item</a>
         </li>
         {% if user.is_authenticated %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'apps:logout' %}">Hello, {{ user.username }}</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'apps:users:logout' %}">Hello, {{ user.username }}</a></li>
         {% else %}
-        <li class="nav-item"><a class="nav-link" href="{% url 'apps:login' %}">Log In</a></li>
+        <li class="nav-item"><a class="nav-link" href="{% url 'apps:users:login' %}">Log In</a></li>
         {% endif %}
 
       </ul>
