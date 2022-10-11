@@ -51,4 +51,4 @@ def logout_request(request):
 # Create your views here.
 def index(request):
     print("I'm on the backend")
-    return render(request, 'users/index.html')
+    return render(request, 'listing/index.html')

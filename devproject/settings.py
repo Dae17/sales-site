@@ -151,7 +151,7 @@ DJANGO_VITE_DEV_MODE = DEBUG
 
 STATIC_ROOT = BASE_DIR / "collectedstatic"
 
-STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH, BASE_DIR / "static"]
+STATICFILES_DIRS = [DJANGO_VITE_ASSETS_PATH, BASE_DIR / "static/"]
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -169,3 +169,7 @@ AUTH_USER_MODEL = "users.User"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
+
+#ReDirect USER on LOGIN
+LOGIN_REDIRECT_URL = "index"
+LOGOUT_REDIRECT_URL = "listing/"
