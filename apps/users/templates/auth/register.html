@@ -1,15 +1,12 @@
 {% extends "__base.html" %}
+{% load crispy_forms_tags %}
+
 {% block content %}
     <div>
         <h1>Register</h1>
         <form method="post">
             {% csrf_token %}
-            {% for field in register_form.visible_fields %}
-                <div class="form-group">
-                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
-                    {{ field }}
-                </div>
-            {% endfor %}
+            {{ register_form|crispy }}
             <button class="btn btn-primary" type="submit">Register</button>
         </form>
         <p>
