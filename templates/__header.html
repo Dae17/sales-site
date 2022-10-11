@@ -4,15 +4,15 @@
 <div>
   <section class="header">
     <nav>
-      <a href="/"><img src=" {% static 'images/logo.png' %}" width="90" height="40" margin-right="100" alt="logo" /></a>
+      <a href="{% url 'apps:index' %}"><img src=" {% static 'images/logo.png' %}" width="90" height="40" margin-right="100" alt="logo" /></a>
       <div class="nav-links">
         <ul>
           <li><a href=""> <i class="bi-alarm"></i>
             Home</a></li>
           <li><a href=""><i class="bi bi-person-circle"></i> Saved</a></li>
           <li><a href="">List Item</a></li>
-          {% if is_authenticated %}
-          <li><a href="{% url 'logout' %}">Log out</a></li>
+          {% if user.is_authenticated %}
+          <li><a href="">Hello, {{ user.username }}</a></li>
           {% else %}
           <li><a href="{% url 'apps:login' %}">Log In</a></li>
           {% endif %}

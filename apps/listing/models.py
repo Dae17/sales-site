@@ -2,6 +2,7 @@
 
 from django.db import models
 from django.contrib.auth import get_user_model
+from django.urls import reverse
 
 
 class item(models.Model):
@@ -10,3 +11,6 @@ class item(models.Model):
     item_name = models.CharField(max_length=120)
     price = models.IntegerField()
     item_discription = models.TextField()
+
+    def get_absolute_url(self):
+        return reverse('apps:detail', args=(self.pk, ))
