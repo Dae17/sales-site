@@ -13,4 +13,7 @@ class item(models.Model):
     item_discription = models.TextField()
 
     def get_absolute_url(self):
-        return reverse('apps:detail', args=(self.pk, ))
+        return reverse('apps:listing:detail', args=(self.pk, ))
+
+    def __str__(self) -> str:
+        return self.item_name
