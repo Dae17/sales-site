@@ -9,11 +9,11 @@ from django.views.generic.edit import CreateView
 
 
 
-def index(request):
+def list(request):
     objs = item.objects.all()
     ordered = sorted(objs, key=operator.attrgetter('price'))
     # return render(request, 'polls/index.html', {"items":  orderer_item})
-    return render(request, 'listing/index.html', {"items": ordered})
+    return render(request, 'listing/list.html', {"items": ordered})
 
 def detail(request, id):
     obj = item.objects.get(pk=id)
