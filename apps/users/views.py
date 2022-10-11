@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from .forms import LoginForm, NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -46,9 +47,4 @@ def login_request(request):
 def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
-    return redirect("users/index.html")
-
-# Create your views here.
-def index(request):
-    print("I'm on the backend")
-    return render(request, 'listing/index.html')
+    return redirect(reverse("apps:index"))

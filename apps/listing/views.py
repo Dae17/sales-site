@@ -2,13 +2,11 @@ import operator
 from django.shortcuts import render
 from django.http import HttpResponse
 
-from apps.listing.forms import ListingForm
 from .models import item
 
 from django.views.generic.edit import CreateView
 
 
-from django.views.generic.edit import FormView
 
 
 def index(request):
