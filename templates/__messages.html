@@ -1,15 +1,14 @@
 {% if messages %}
-<div class="messages">
+<div class="container">
     {% for message in messages %}
     <div x-data="{ open: true }">
         <div x-show="open" x-transition>
-
-            <div class="alert alert-primary d-flex">
+            <div class="alert alert-primary d-flex" >
                 <div>
                     <span>{{ message }}</span>
                 </div>
-                <div class="ms-auto" role="button" x-on:click="open = false">
-                    <i class="bi bi-x-circle"></i>
+                <div class="ms-auto" role="button"  x-on:click="open = false">
+                    <i class="bi bi-x-circle" style="cursor:pointer;"></i>
                 </div>
             </div>
         </div>
