@@ -11,6 +11,7 @@ class item(models.Model):
     item_name = models.CharField(max_length=120)
     price = models.IntegerField()
     item_discription = models.TextField()
+    photo = models.ImageField(upload_to='items')
 
     def get_absolute_url(self):
         return reverse('apps:listing:detail', args=(self.pk, ))

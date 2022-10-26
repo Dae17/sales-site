@@ -173,3 +173,7 @@ CRISPY_TEMPLATE_PACK = "bootstrap5"
 #ReDirect USER on LOGIN
 LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "listing/"
+
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = "media/"
