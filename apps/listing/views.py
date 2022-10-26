@@ -24,7 +24,7 @@ class ItemDetailView(DetailView):
 
 class ItemCreateView(SuccessMessageMixin, CreateView):
     model = item
-    fields = ['item_name', 'price', 'item_discription']
+    fields = ['item_name', 'price', 'item_discription', "photo"]
     template_name = 'listing/create.html'
     success_message = "'%(item_name)s' was created successfully"
 
