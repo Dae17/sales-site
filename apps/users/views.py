@@ -13,7 +13,7 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("apps:listing:list")
+            return redirect("main:homepage")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(
@@ -33,7 +33,7 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("apps:listing:list")
+                return redirect(reverse("apps:listing:list"))
             else:
                 messages.error(request, "Invalid username or password.")
         else:

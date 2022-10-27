@@ -6,6 +6,8 @@ from .models import item
 
 from django.views.generic.edit import CreateView
 
+from django.views.generic.detail import DetailView
+
 from django.contrib.messages.views import SuccessMessageMixin
 
 
@@ -16,9 +18,9 @@ def list(request):
     # return render(request, 'polls/index.html', {"items":  orderer_item})
     return render(request, 'listing/list.html', {"items": ordered})
 
-def detail(request, id):
-    obj = item.objects.get(pk=id)
-    return HttpResponse(obj.item_name)
+class ItemDetailView(DetailView):
+    model = item
+
 
 class ItemCreateView(SuccessMessageMixin, CreateView):
     model = item
@@ -32,3 +34,4 @@ class ItemCreateView(SuccessMessageMixin, CreateView):
         listing.owner = self.request.user
         listing.save()
         return super().form_valid(form)
+    
