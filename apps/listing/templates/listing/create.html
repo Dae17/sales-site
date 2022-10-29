@@ -9,6 +9,6 @@
 <form enctype="multipart/form-data" action="{% url 'apps:listing:create' %}" method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <button type="submit" class="btn btn-success">Save person</button>
+    <button type="submit" class="btn btn-success">Upload Item</button>
 </form>
 {% endblock content %}

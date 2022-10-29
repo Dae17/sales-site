@@ -1,18 +1,48 @@
+{%load static%}
+<style>
 
+.jiggle {
+  -webkit-animation: jiggle 0.2s infinite;
+  -moz-animation-duration: 0.2s;
+  -moz-animation-name: jiggle;
+  -moz-animation-iteration-count: infinite;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+}
+
+@-moz-keyframes jiggle {
+  0% {
+      -moz-transform: rotate(-1deg);
+  }
+  50% {
+      -moz-transform: rotate(1deg);
+  }
+}
+
+@-webkit-keyframes jiggle {
+  0% {
+      -webkit-transform: rotate(-1deg);
+      }
+  50% {
+      -webkit-transform: rotate(1deg);
+  }
+}
+</style>
 
           <footer class="text-center text-lg-start bg-light text-muted">
             <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
                 <div class="jiggle">
-                    <script async>
-                        BurningWords("Made With HATE", {
-                            "text_color" : "000000",
-                            "font" : "Times New Roman",
-                            "font_size" : 30,
-                            "bg_color" : "EEEEEE",
-                            "bg_alpha" : 0,
-                            "speed" : "normal"
-                          });
-                      </script>
+                    <!-- <script async> -->
+                        <!-- // BurningWords("Price Check", {
+                        //     "text_color" : "000000",
+                        //     "font" : "Times New Roman",
+                        //     "font_size" : 30,
+                        //     "bg_color" : "EEEEEE",
+                        //     "bg_alpha" : 0,
+                        //     "speed" : "normal"
+                        //   }); -->
+                        <img class="click-to-jiggle jiggle" src=" {% static 'images/logo.png' %}" width="90" height="40" margin-right="100" alt="logo" />
+                      <!-- </script> -->
                   </div>
             </div>
           </footer>
