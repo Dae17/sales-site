@@ -13,18 +13,23 @@
       <!--Product 1 on Grid-->
       <div class="card">
         <div class="">
-          <a href="product.html"><img class="card-img-top" src=" {{ item.photo.url }}" alt="logo" /></a>
+          <a href="{% url 'apps:listing:detail' item.id %}"><img class="card-img-top" src=" {{ item.photo.url }}" width="300" height="300"  /></a>
         </div>
         <div class="card-body p-4">
           <div class="text-center">
             <div class="fw-bolder">{{item.item_name}}</div>
-            <div class="">{{item.price}}</div>
+            <div class="">${{item.price}}</div>
           </div>
         </div>
         <div>
           <div class="card-footer pt-0 p-4 border-top-0 bg-transparent">
             <div class="text-center">
-              <a href="{% url 'apps:listing:detail' item.id %}"><button class="btn btn-primary btn-block">Buy</button> </a>
+              <a href="{% url 'apps:listing:detail' item.id %}"><button type = "button" class="btn btn-outline-danger btn-lg btn-block">Price Check</button>  </a>
+              <span x-data="{ open: false }">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" :fill="open ? 'red' : 'black'" height="16" class="bi bi-heart-fill" viewBox="0 0 16 16" x-on:click="open = ! open">
+                  <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                </svg>
+              </span>
             </div>
           </div>
         </div>
