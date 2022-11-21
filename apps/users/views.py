@@ -3,7 +3,7 @@ from django.urls import reverse
 from .forms import LoginForm, NewUserForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-
+from django.contrib.auth.decorators import login_required
 
 def register_request(request):
     if request.method == "POST":
@@ -48,3 +48,7 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect(reverse("apps:listing:list"))
+
+@login_required
+def profile(request):
+    return render(request, "/users/profile.html")
