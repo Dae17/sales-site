@@ -16,11 +16,6 @@ from django.views.generic import TemplateView, ListView
 
 
 
-def list(request):
-    objs = item.objects.all()
-    ordered = sorted(objs, key=operator.attrgetter('price'))
-    # return render(request, 'polls/index.html', {"items":  orderer_item})
-    return render(request, 'listing/list.html', {"items": ordered})
 
 class ItemDetailView(DetailView):
     model = item
@@ -40,13 +35,16 @@ class ItemCreateView(SuccessMessageMixin, CreateView):
         return super().form_valid(form)
 
 
-class SearchResultsView(ListView):
+class ListAndSearchView(ListView):
     model = item
-    template_name = 'search_results.html'
+    template_name = 'listing/list.html'
 
     def get_queryset(self):  # new
+        queryset = super().get_queryset()
         query = self.request.GET.get("q")
-        object_list = City.objects.filter(
-            Q(name__icontains=query) 
-        )
-        return object_list
+        if query:
+            queryset = queryset.filter(
+                item_name__icontains=query 
+            )
+        ordered = sorted(queryset, key=operator.attrgetter('price'))
+        return ordered
