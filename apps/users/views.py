@@ -13,7 +13,7 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect("main:homepage")
+            return redirect("apps:listing:list")
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(
