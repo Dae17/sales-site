@@ -28,7 +28,7 @@ from django.contrib import admin
 from .models import User
 from .forms import NewUserForm
 from django.contrib.auth.admin import UserAdmin
-from .models import Profile
+
 
 class CustomUserAdmin(UserAdmin):
     model = User
@@ -36,4 +36,3 @@ class CustomUserAdmin(UserAdmin):
 
 
 admin.site.register(User, CustomUserAdmin)
-admin.site.register(Profile)
