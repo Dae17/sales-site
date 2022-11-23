@@ -2,6 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from.models import User
+from django.utils.translation import gettext_lazy as _
 
 
 class NewUserForm(UserCreationForm):
@@ -22,3 +23,27 @@ class NewUserForm(UserCreationForm):
 class LoginForm(AuthenticationForm):
     class Meta:
         model = get_user_model()
+
+
+
+class Profileupdate(forms.ModelForm):
+    class Meta:
+        model= get_user_model() 
+        fields=['photo','bio']
+
+
+class bilingform(forms.Form):
+    payment_method_nonce = forms.CharField(
+        max_length=1000,
+        widget=forms.widgets.HiddenInput,
+        required=False,)  # In the end it's a required field, but I wanted to provide a custom exception message
+    
+    
+    def clean(self):
+        self.cleaned_data = super(bilingform.self).clean()
+        # Braintree nonce is missing
+        if not self.cleaned_data.get('payment_method_nonce'):
+            raise forms.ValidationError(_(
+                'We couldn\'t verify your payment. Please try again.'))
+        return self.cleaned_data
+    

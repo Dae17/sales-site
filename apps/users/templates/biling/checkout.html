@@ -1,0 +1,49 @@
+{% extends '__base.html' %}
+{% load static %}
+{% block content %}
+
+<script src="https://js.braintreegateway.com/js/braintree-2.20.0.js"></script>
+
+
+{% block main %}
+  <form method="post" action="." autocomplete="off">
+    {% csrf_token %}
+    <p>Payments are safely processed with <a href='https://www.braintreepayments.com/' target='_blank'>Braintree</a>.</p>
+    {% if braintree_error %}
+      <div class="alert alert-danger fade in">
+          <button class="close" data-dismiss="alert">&times;</button>
+          {{ braintree_error|safe }}
+      </div>
+    {% endif %}
+    <div class="braintree-notifications"></div>
+    <div id="braintree-dropin"></div>
+    <input class="btn btn-success btn-lg btn-block" type="submit" value="Pay now!" />
+  </form>
+{% endblock %}
+
+<script>
+    // Remember? You generated the client token in your view.
+    var braintree_client_token = "{{ braintree_client_token }}";
+  
+    requirejs(['jquery', 'jsi18n', 'https://js.braintreegateway.com/js/braintree-2.28.0.min.js'], function($, jsi18n, braintree) {
+        function braintreeSetup() {
+            // Here you tell Braintree to add the drop-in to your division above
+            braintree.setup(braintree_client_token, "dropin", {
+                container: "braintree-dropin"
+                ,onError: function (obj) {
+                    // Errors will be added to the html code
+                    $('[type=submit]').prop('disabled', false);
+                    $('.braintree-notifications').html('<p class="alert alert-danger">' + obj.message + '</p>');
+                }
+            });
+        }
+        braintreeSetup();
+
+        $('form').submit(function () {
+            $('[type=submit]').prop('disabled', true);
+            $('.braintree-notifications').html('');
+        });
+    });
+</script>
+
+{%endblock content%}

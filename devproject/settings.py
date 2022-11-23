@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-
+import sys
 import os
 import re
 from pathlib import Path
@@ -175,5 +175,14 @@ LOGIN_REDIRECT_URL = "index"
 LOGOUT_REDIRECT_URL = "listing/"
 
 
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = "media/"
+
+if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
+    BRAINTREE_PRODUCTION = False
+else:
+    BRAINTREE_PRODUCTION = True
+BRAINTREE_MERCHANT_ID = '2qc458zdxyhvmbkd'
+BRAINTREE_PUBLIC_KEY = 'stn5j986jxm2976f'
+BRAINTREE_PRIVATE_KEY = 'f2a3ed9bf0df47e24531cad22bb8cbbf'
