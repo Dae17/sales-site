@@ -18,7 +18,8 @@
                 </h2>
                     <i class="fa fa-shopping-cart"></i>
                 </button>
-                <button type = "button" class="btn btn-danger">Buy</button>  
+
+                <a href='{% url "apps:listing:checkout" pk=object.id %}'><button type = "button" class="btn btn-danger">Buy</button>  </a>
                 <span x-data="{ open: false }">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" :fill="open ? 'red' : 'black'" height="16" class="bi bi-heart-fill" viewBox="0 0 16 16" x-on:click="open = ! open">
                     <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
@@ -36,6 +37,7 @@
                 {% endif %}
                 <button type = "button" class="btn btn-danger">Message</button>
               
+
             </div>
         </div >
     </div>

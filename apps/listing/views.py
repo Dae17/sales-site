@@ -1,8 +1,11 @@
 import operator
+import braintree
+from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
 
 from django.db.models import Q
+
 
 from .models import item
 
@@ -42,8 +45,6 @@ class ItemCreateView(SuccessMessageMixin, CreateView):
         listing.owner = self.request.user
         listing.save()
         return super().form_valid(form)
-
-#class UpdateItem(UpdateView):
 
 
 class ListAndSearchView(ListView):
@@ -86,3 +87,47 @@ class ItemUpdateView(UpdateView ):
             return redirect("apps:listing:list")
         return super(ItemUpdateView, self).dispatch(
             request, *args, **kwargs)
+            
+def checkout_page(request, pk):
+
+    if settings.BRAINTREE_PRODUCTION:
+        braintree_env = braintree.Environment.Production
+    else:
+        braintree_env = braintree.Environment.Sandbox
+
+    braintree.Configuration.configure(
+        braintree_env,
+        merchant_id=settings.BRAINTREE_MERCHANT_ID,
+        public_key=settings.BRAINTREE_PUBLIC_KEY,
+        private_key=settings.BRAINTREE_PRIVATE_KEY,
+    )
+ 
+    try:
+        braintree_client_token = braintree.ClientToken.generate({ "customer_id": request.user.id })
+    except:
+        braintree_client_token = braintree.ClientToken.generate({})
+
+    context = {'braintree_client_token': braintree_client_token, "pk": pk}
+    return render(request, 'checkout.html', context)
+
+def payment(request):
+    obj = item.objects.get(pk=int(request.headers['pk']))
+
+    nonce_from_the_client = request.headers['paymentMethodNonce']
+    customer_kwargs = {
+        "first_name": request.user.first_name,
+        "last_name": request.user.last_name,
+        "email": request.user.email,
+    }
+    customer_create = braintree.Customer.create(customer_kwargs)
+    customer_id = customer_create.customer.id
+    result = braintree.Transaction.sale({
+        "amount": str(obj.price) + ".00",
+        "payment_method_nonce": nonce_from_the_client,
+        "options": {
+            "submit_for_settlement": True
+        }
+    })
+    print(result)
+    return HttpResponse('Ok')
+    
