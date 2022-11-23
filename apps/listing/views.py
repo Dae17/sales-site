@@ -63,7 +63,7 @@ def checkout_page(request):
     return render(request, 'checkout.html', context)
 
 def payment(request):
-    nonce_from_the_client = request.POST['paymentMethodNonce']
+    nonce_from_the_client = request.headers['paymentMethodNonce']
     customer_kwargs = {
         "first_name": request.user.first_name,
         "last_name": request.user.last_name,
@@ -72,7 +72,7 @@ def payment(request):
     customer_create = braintree.Customer.create(customer_kwargs)
     customer_id = customer_create.customer.id
     result = braintree.Transaction.sale({
-        "amount": "10.00",
+        "amount": "100.00",
         "payment_method_nonce": nonce_from_the_client,
         "options": {
             "submit_for_settlement": True

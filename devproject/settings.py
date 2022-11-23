@@ -183,6 +183,6 @@ if (len(sys.argv) >= 2 and sys.argv[1] == 'runserver'):
     BRAINTREE_PRODUCTION = False
 else:
     BRAINTREE_PRODUCTION = True
-BRAINTREE_MERCHANT_ID = '2qc458zdxyhvmbkd'
-BRAINTREE_PUBLIC_KEY = 'stn5j986jxm2976f'
-BRAINTREE_PRIVATE_KEY = 'f2a3ed9bf0df47e24531cad22bb8cbbf'
+BRAINTREE_MERCHANT_ID = 'pcvgwf2czq65hswx'
+BRAINTREE_PUBLIC_KEY = 'rhfxcyqzj3rxwdwx'
+BRAINTREE_PRIVATE_KEY = 'cf4fdda55e4172b863baeca2a8d93b5c'

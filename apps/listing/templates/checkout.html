@@ -35,14 +35,7 @@
     }, function (createErr, instance) {
         button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
-                $.ajax({
-                    type: 'POST',
-                    url: '{% url "apps:listing:payment" %}',
-                    data: {'paymentMethodNonce': payload.nonce,
-                            'csrfmiddlewaretoken': '{{ csrf_token }}'}
-                }).done(function (result) {
-                   //do accordingly
-                });
+              fetch( '{% url "apps:listing:payment" %}', {method: "POST", headers: {"X-CSRFToken": '{{ csrf_token }}', paymentMethodNonce: payload.nonce}  })
             });
         });
     });
