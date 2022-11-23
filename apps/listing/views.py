@@ -38,15 +38,13 @@ class ItemCreateView(SuccessMessageMixin, CreateView):
         listing.save()
         return super().form_valid(form)
 
-def checkout_page(request):
-    #generate all other required data that you may need on the #checkout page and add them to context.
+def checkout_page(request, pk):
 
     if settings.BRAINTREE_PRODUCTION:
         braintree_env = braintree.Environment.Production
     else:
         braintree_env = braintree.Environment.Sandbox
 
-    # Configure Braintree
     braintree.Configuration.configure(
         braintree_env,
         merchant_id=settings.BRAINTREE_MERCHANT_ID,
@@ -59,10 +57,12 @@ def checkout_page(request):
     except:
         braintree_client_token = braintree.ClientToken.generate({})
 
-    context = {'braintree_client_token': braintree_client_token}
+    context = {'braintree_client_token': braintree_client_token, "pk": pk}
     return render(request, 'checkout.html', context)
 
 def payment(request):
+    obj = item.objects.get(pk=int(request.headers['pk']))
+
     nonce_from_the_client = request.headers['paymentMethodNonce']
     customer_kwargs = {
         "first_name": request.user.first_name,
@@ -72,7 +72,7 @@ def payment(request):
     customer_create = braintree.Customer.create(customer_kwargs)
     customer_id = customer_create.customer.id
     result = braintree.Transaction.sale({
-        "amount": "100.00",
+        "amount": str(obj.price) + ".00",
         "payment_method_nonce": nonce_from_the_client,
         "options": {
             "submit_for_settlement": True
