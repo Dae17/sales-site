@@ -27,7 +27,8 @@ def register_request(request):
             user = form.save()
             login(request, user)
             messages.success(request, "Registration successful.")
-            return redirect(reverse("apps:listing:list"))
+            return redirect("apps:listing:list")
+
         messages.error(request, "Unsuccessful registration. Invalid information.")
     form = NewUserForm()
     return render(
@@ -62,6 +63,7 @@ def logout_request(request):
     logout(request)
     messages.info(request, "You have successfully logged out.")
     return redirect(reverse("apps:listing:list"))
+
 
 def profile_request(request):
     user = request.user

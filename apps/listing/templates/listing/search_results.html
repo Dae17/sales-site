@@ -1,0 +1,16 @@
+{% extends '__base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+
+{% block title %}Price Check{% endblock title %}
+
+{% block content %}
+<ul>
+    {% for item in object_list %}
+      <li>
+        {{item.item_name}}
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

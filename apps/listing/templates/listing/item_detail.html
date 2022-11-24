@@ -18,6 +18,7 @@
                 </h2>
                     <i class="fa fa-shopping-cart"></i>
                 </button>
+
                 <a href='{% url "apps:listing:checkout" pk=object.id %}'><button type = "button" class="btn btn-danger">Buy</button>  </a>
                 <span x-data="{ open: false }">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" :fill="open ? 'red' : 'black'" height="16" class="bi bi-heart-fill" viewBox="0 0 16 16" x-on:click="open = ! open">
@@ -25,6 +26,18 @@
                   </svg>
                 </span>  
                 </ul>
+                <h3 class ="mt-5">
+                  {{object.owner}}
+                </h3>
+
+                {% if request.user.is_authenticated and object.owner == request.user %}
+                <a href="{% url 'apps:listing:update' pk=object.id %}"> 
+                  <button type = "button" class="btn btn-danger" >Edit</button>
+                </a>
+                {% endif %}
+                <button type = "button" class="btn btn-danger">Message</button>
+              
+
             </div>
         </div >
     </div>
