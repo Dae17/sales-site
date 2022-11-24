@@ -7,3 +7,9 @@
 
 4) pydj2 manage.py runserver
 
+
+
+1) git add . 
+2) git status  // 
+3) git commit -m "comment"   //this is to comit to tour change
+4) git pull origin master    
