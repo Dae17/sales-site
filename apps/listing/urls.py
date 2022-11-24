@@ -11,5 +11,5 @@ urlpatterns = [
     path('payment', views.payment, name = "payment"),
     path('update/<pk>/', views.ItemUpdateView.as_view(), name= "update"),
     path('listing/<pk>/', views.ItemDetailView.as_view(), name='detail'),
-    path('', views.list, name='list'),
+    path('', views.ListAndSearchView.as_view(), name='list'),
 ]
