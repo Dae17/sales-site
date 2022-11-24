@@ -35,7 +35,7 @@
     }, function (createErr, instance) {
         button.addEventListener('click', function () {
             instance.requestPaymentMethod(function (err, payload) {
-              fetch( '{% url "apps:listing:payment" %}', {method: "POST", headers: {"X-CSRFToken": '{{ csrf_token }}', paymentMethodNonce: payload.nonce, pk: "{{ pk }}"}  })
+              fetch( '{% url "apps:listing:payment" %}', {method: "POST", headers: {"X-CSRFToken": '{{ csrf_token }}', paymentMethodNonce: payload.nonce, pk: "{{ pk }}"}  }).then(() => {window.location.href = '{% url "apps:listing:list" %}'})
             });
         });
     });

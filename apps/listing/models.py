@@ -12,6 +12,7 @@ class item(models.Model):
     price = models.IntegerField()
     item_discription = models.TextField()
     photo = models.ImageField(upload_to='items')
+    # is_sold = models.BooleanField(default=False)
 
     def get_absolute_url(self):
         return reverse('apps:listing:detail', args=(self.pk, ))

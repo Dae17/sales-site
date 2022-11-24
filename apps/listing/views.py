@@ -3,7 +3,7 @@ import braintree
 from django.conf import settings
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from django.contrib import messages
 from django.db.models import Q
 
 
@@ -59,6 +59,7 @@ class ListAndSearchView(ListView):
                 item_name__icontains=query 
             )
         ordered = sorted(queryset, key=operator.attrgetter('price'))
+        # TODO filter out items that are sold in 'ordered'
         return ordered
 
 
@@ -128,6 +129,9 @@ def payment(request):
             "submit_for_settlement": True
         }
     })
+    messages.info(request, "you bought an item :) :)")
+    obj.delete()
+    # TODO add delete right here
     print(result)
     return HttpResponse('Ok')
     
