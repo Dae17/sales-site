@@ -5,7 +5,10 @@
 
 {% block content %}
 
-
+<form class="form-inline my-2 my-lg-0" action="/" method="get">
+  <input class="form-control mr-sm-2" type="search" name="q" placeholder="Search" aria-label="Search">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">Search</button>
+</form>
 
   <div class="row justify-content-center gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row cols-xl-4">
     {% for item in object_list %}
