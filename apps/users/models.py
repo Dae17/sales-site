@@ -12,6 +12,10 @@ from django.contrib.auth import get_user_model
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+import secrets
+from .utils import custom_id
+
+
 
 class User(AbstractUser):
   photo = models.ImageField(upload_to='users', null=True)

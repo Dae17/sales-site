@@ -11,6 +11,8 @@ from django.views.generic.detail import DetailView
 
 from django.views.generic.base import TemplateView
 
+from django.views.generic import UpdateView
+
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from django.views import generic
@@ -95,3 +97,28 @@ class CurrentUserDetailView(DetailView):
     model = get_user_model()
     def get_object(self):
         return self.request.user
+
+class UserUpdateView(UpdateView):
+    model = get_user_model()
+    template_name = "users/user_update.html"
+    fields = ['bio', 'photo']
+
+    def user_passes_test(self, request):
+        if request.user.is_authenticated:
+            self.object = self.get_object()
+            return self.object.owner == request.user
+        return False
+
+    def post(self, request, *args, **kwargs):
+        if "confirm_delete" in self.request.POST:
+            self.get_object().delete()
+            return redirect("users:user_update") 
+        return super(UserUpdateView, self).post(
+            request, *args, **kwargs)
+
+
+    def dispatch(self, request, *args, **kwargs):
+        if not self.user_passes_test(request):
+            return redirect("users:user_update")
+        return super(UserUpdateView, self).dispatch(
+            request, *args, **kwargs)

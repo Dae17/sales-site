@@ -44,7 +44,11 @@
                             </div>
                         </div>
                         <div class="col-md-2">
-                            <input type="submit" class="profile-edit-btn" name="btnAddMore" value="Edit Profile"/>
+                            {% if request.user.is_authenticated %}
+                <a href="{% url 'apps:listing:update' pk=object.id %}"> 
+                  <button type = "button" class="btn btn-danger" >Edit Profile</button>
+                </a>
+                {% endif %}
                         </div>
                     </div>
                     <div class="row">
