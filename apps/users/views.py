@@ -1,6 +1,6 @@
 import braintree
 from django.shortcuts import render, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import LoginForm, NewUserForm, Profileupdate
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
@@ -18,6 +18,7 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 from django.contrib.auth import get_user_model
 
+from apps.listing.models import item 
 
 from . import forms
 
@@ -75,6 +76,7 @@ def profile_request(request):
 class UserDetailView(DetailView):
     template_name = "userprofile.html"
     model = get_user_model()
+    items = item.objects.all()
     slug_field = "username"
     slug_url_kwarg = "username"
 
@@ -95,30 +97,18 @@ def profile(request):
 class CurrentUserDetailView(DetailView):
     template_name = "userprofile.html"
     model = get_user_model()
+    items = item.objects.all()
     def get_object(self):
         return self.request.user
 
 class UserUpdateView(UpdateView):
-    model = get_user_model()
-    template_name = "users/user_update.html"
-    fields = ['bio', 'photo']
+    model= get_user_model()
+    form_class = forms.CustomUserChangeForm
+    template_name = "user_update.html"
 
-    def user_passes_test(self, request):
-        if request.user.is_authenticated:
-            self.object = self.get_object()
-            return self.object.owner == request.user
-        return False
+    def get_object(self):
+        return self.request.user
 
-    def post(self, request, *args, **kwargs):
-        if "confirm_delete" in self.request.POST:
-            self.get_object().delete()
-            return redirect("users:user_update") 
-        return super(UserUpdateView, self).post(
-            request, *args, **kwargs)
+    def get_success_url(self) -> str:
+        return reverse("apps:users:user-detail", args=[self.request.user.username]) 
 
-
-    def dispatch(self, request, *args, **kwargs):
-        if not self.user_passes_test(request):
-            return redirect("users:user_update")
-        return super(UserUpdateView, self).dispatch(
-            request, *args, **kwargs)
