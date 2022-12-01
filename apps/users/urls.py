@@ -11,5 +11,5 @@ urlpatterns = [
    path('logout/', views.logout_request, name='logout'),
    path('<username>/', views.UserDetailView.as_view(), name= "user-detail"),
    path('propic/', views.Profileupdate, name='Propic' ),
-   path('update/<pk>/', views.UserUpdateView.as_view(), name= "edit-user")
+   path('user_update/<pk>/', views.UserUpdateView.as_view(), name= "user_update")
 ]

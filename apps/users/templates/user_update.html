@@ -9,8 +9,6 @@
 <form enctype="multipart/form-data"  method="post">
     {% csrf_token %}
     {{ form|crispy }}
-    <input type="checkbox" class="form-check-input" id="confirm_delete" name="confirm_delete" value="confirm_delete">
-    <label for="confirm_delete" class="form-check-label"> Delete?</label><br>
-    <button type="submit" class="btn btn-success">Edit Item</button>
+    <button type="submit" class="btn btn-success">Apply Changes</button>
 </form>
 {% endblock content %}

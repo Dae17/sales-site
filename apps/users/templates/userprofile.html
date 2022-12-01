@@ -6,159 +6,129 @@
 
 
 <style>
-      img{
-        border-radius: 50%
+      div.profile-img img{
+        
+        display: block;
+        width: 55%;
+         margin-left: auto;
+         margin-right: auto;
+         margin-top: 5%;
+         border-radius: 50%
     }
+    .button.c{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        -ms-transform: translateY(-50%);
+         transform: translateY(-50%);
+    }
+     div.container.emp-profile{
+        background-color: #FFCCCB;
+    } 
+   
 </style>
 
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-    
+    {% comment %} <!------ Include the above in your HEAD tag ---------->   {% endcomment %}
     <div class="container emp-profile">
                 <form method="post">
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-4 Pro">
                             <div class="profile-img">
                                 {% if object.photo %}
                                 <img src="{{ object.photo.url }}" alt="Avatar" width="200" height="200"  /> 
                                 {% endif %}
+                                <h1 text-align="right">
+                                </h1> 
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="profile-head">
-                                        <h5>
-                                            Hello, {{ object.username }}
-                                        </h5>
-                                        <h6>
-                                            Web Developer and Designer
-                                        </h6>
-                                        <p class="proile-rating">RANKINGS : <span>8/10</span></p>
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">About</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Timeline</a>
-                                    </li>
-                                </ul>
+                        <div class="col-md-5">
+                            <h1 text-align="right">
+                                {{ object.username}}
+                            </h1> 
+                            <div class="col-md-6">
+                                <p>{{object.bio}}</p>
                             </div>
+                            <p><i class="bi bi-geo"></i> {{object.location}}</p>
                         </div>
                         <div class="col-md-2">
                             {% if request.user.is_authenticated %}
-                <a href="{% url 'apps:listing:update' pk=object.id %}"> 
-                  <button type = "button" class="btn btn-danger" >Edit Profile</button>
+                <a href="{% url 'apps:users:user_update' 1 %}"> 
+                  <button type = "button" class="btn btn-danger" >Edit/Add Info</button>
                 </a>
                 {% endif %}
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-4">
-                            <div class="profile-work">
-                                <p>WORK LINK</p>
-                                <a href="">Website Link</a><br/>
-                                <a href="">Bootsnipp Profile</a><br/>
-                                <a href="">Bootply Profile</a>
-                                <p>SKILLS</p>
-                                <a href="">Web Designer</a><br/>
-                                <a href="">Web Developer</a><br/>
-                                <a href="">WordPress</a><br/>
-                                <a href="">WooCommerce</a><br/>
-                                <a href="">PHP, .Net</a><br/>
+                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
                             </div>
+                            <div class="modal-body">
+                              {{object.email}}
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Got It!</button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                        <div class="col-md-4 text-center">
+                          <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            Contact
+                          </button>
                         </div>
                         <div class="col-md-8">
+                            {%for item in object.items.all%}                            
                             <div class="tab-content profile-tab" id="myTabContent">
                                 <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>User Id</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Kshiti123</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Name</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Kshiti Ghelani</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Email</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>kshitighelani@gmail.com</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Phone</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>123 456 7890</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Profession</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Web Developer and Designer</p>
-                                                </div>
-                                            </div>
-                                </div>
-                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Experience</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Expert</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Hourly Rate</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>10$/hr</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Total Projects</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>230</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>English Level</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>Expert</p>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-6">
-                                                    <label>Availability</label>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <p>6 months</p>
-                                                </div>
-                                            </div>
                                     <div class="row">
-                                        <div class="col-md-12">
-                                            <label>Your Bio</label><br/>
-                                            <p>Your detail description</p>
+                                        <div class="col-md-8">
+                                            <label>Listed Products</label>
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h1 class="card-title" >{{ item.item_name }}</h1>
+                                                    <div class="row">
+                                                        <div class="col-lg-5 col-md-5 col-sm-6">
+                                                          <div class="white-box text-center"><img src="{{ item.photo.url }}" class="img-responsive" width="200" height="100"/></div>
+                                                        </div>
+                                                        <div class="col-lg-7 col-md-7 col-sm-6">
+                                                            <h4 class="box-title mt-5">Product description</h4>
+                                                            <p>{{item.item_discription}}</p>
+                                                            <h2 class="mt-5">
+                                                                ${{item.price}}
+                                                            </h2>
+                                                                <i class="fa fa-shopping-cart"></i>
+                                                            </button>
+                                            
+                                                            <a href='{% url "apps:listing:checkout" pk=object.id %}'><button type = "button" class="btn btn-danger">Buy</button>  </a>
+                                                            <span x-data="{ open: false }">
+                                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" :fill="open ? 'red' : 'black'" height="16" class="bi bi-heart-fill" viewBox="0 0 16 16" x-on:click="open = ! open">
+                                                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                                              </svg>
+                                                            </span>  
+                                                            </ul>
+                                                            <h3 class ="mt-5">
+                                                              {{object.owner}}
+                                                            </h3>
+                                            
+                                                        </div>
+                                                    </div >
+                                                </div>
+                                            </div>
+                                            
+                                            
                                         </div>
                                     </div>
-                                </div>
+                                 </div>
+                                 
                             </div>
+                            {%endfor%}
                         </div>
                     </div>
                 </form>           

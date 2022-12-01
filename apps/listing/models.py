@@ -6,7 +6,7 @@ from django.urls import reverse
 
 
 class item(models.Model):
-    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+    owner = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="items")
 
     item_name = models.CharField(max_length=120)
     price = models.IntegerField()

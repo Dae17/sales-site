@@ -29,6 +29,7 @@ from django.shortcuts import redirect
 
 
 
+
 class ItemDetailView(DetailView):
     model = item
 
