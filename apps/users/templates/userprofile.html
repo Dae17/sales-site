@@ -6,131 +6,118 @@
 
 
 <style>
-      div.profile-img img{
-        
-        display: block;
-        width: 55%;
-         margin-left: auto;
-         margin-right: auto;
-         margin-top: 5%;
-         border-radius: 50%
-    }
-    .button.c{
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-         transform: translateY(-50%);
-    }
-     div.container.emp-profile{
-        background-color: #FFCCCB;
-    } 
-   
+  div.row.justify-content-center.gx-4.gx-lg-5.row-cols-2.row-cols-md-3.row.cols-xl-4 {
+    padding-top: 30px;
+  }
+
+  div.profile-img img {
+
+    display: block;
+    width: 55%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    border-radius: 50%
+  }
+
+  div.col-md-2 {
+    padding-top: 25px;
+  }
+
+  .button.c {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+
+  div.container.emp-profile {
+    background-color: #FFCCCB;
+  }
 </style>
 
-    <script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    {% comment %} <!------ Include the above in your HEAD tag ---------->   {% endcomment %}
-    <div class="container emp-profile">
-                <form method="post">
-                    <div class="row">
-                        <div class="col-md-4 Pro">
-                            <div class="profile-img">
-                                {% if object.photo %}
-                                <img src="{{ object.photo.url }}" alt="Avatar" width="200" height="200"  /> 
-                                {% endif %}
-                                <h1 text-align="right">
-                                </h1> 
-                            </div>
-                        </div>
-                        <div class="col-md-5">
-                            <h1 text-align="right">
-                                {{ object.username}}
-                            </h1> 
-                            <div class="col-md-6">
-                                <p>{{object.bio}}</p>
-                            </div>
-                            <p><i class="bi bi-geo"></i> {{object.location}}</p>
-                        </div>
-                        <div class="col-md-2">
-                            {% if request.user.is_authenticated %}
-                <a href="{% url 'apps:users:user_update' 1 %}"> 
-                  <button type = "button" class="btn btn-danger" >Edit/Add Info</button>
-                </a>
-                {% endif %}
-                        </div>
-                    </div>
-                    <div class="row">
-                      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                            <div class="modal-header">
-                              <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                              </button>
-                            </div>
-                            <div class="modal-body">
-                              {{object.email}}
-                            </div>
-                            <div class="modal-footer">
-                              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Got It!</button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                        <div class="col-md-4 text-center">
-                          <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Contact
-                          </button>
-                        </div>
-                        <div class="col-md-8">
-                            {%for item in object.items.all%}                            
-                            <div class="tab-content profile-tab" id="myTabContent">
-                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-                                    <div class="row">
-                                        <div class="col-md-8">
-                                            <label>Listed Products</label>
-                                            <div class="card">
-                                                <div class="card-body">
-                                                    <h1 class="card-title" >{{ item.item_name }}</h1>
-                                                    <div class="row">
-                                                        <div class="col-lg-5 col-md-5 col-sm-6">
-                                                          <div class="white-box text-center"><img src="{{ item.photo.url }}" class="img-responsive" width="200" height="100"/></div>
-                                                        </div>
-                                                        <div class="col-lg-7 col-md-7 col-sm-6">
-                                                            <h4 class="box-title mt-5">Product description</h4>
-                                                            <p>{{item.item_discription}}</p>
-                                                            <h2 class="mt-5">
-                                                                ${{item.price}}
-                                                            </h2>
-                                                                <i class="fa fa-shopping-cart"></i>
-                                                            </button>
-                                            
-                                                            <a href='{% url "apps:listing:checkout" pk=object.id %}'><button type = "button" class="btn btn-danger">Buy</button>  </a>
-                                                            <span x-data="{ open: false }">
-                                                              <svg xmlns="http://www.w3.org/2000/svg" width="16" :fill="open ? 'red' : 'black'" height="16" class="bi bi-heart-fill" viewBox="0 0 16 16" x-on:click="open = ! open">
-                                                                <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-                                                              </svg>
-                                                            </span>  
-                                                            </ul>
-                                                            <h3 class ="mt-5">
-                                                              {{object.owner}}
-                                                            </h3>
-                                            
-                                                        </div>
-                                                    </div >
-                                                </div>
-                                            </div>
-                                            
-                                            
-                                        </div>
-                                    </div>
-                                 </div>
-                                 
-                            </div>
-                            {%endfor%}
-                        </div>
-                    </div>
-                </form>           
+<script defer src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{% comment %}
+<!------ Include the above in your HEAD tag ----------> {% endcomment %}
+<div class="container emp-profile">
+  <form method="post">
+    <div class="row">
+      <div class="col-md-4 Pro">
+        <div class="profile-img">
+          {% if object.photo %}
+          <img src="{{ object.photo.url }}" alt="Avatar" width="200" height="200" />
+          {% endif %}
+          <h1 text-align="right">
+          </h1>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h1 text-align="right">
+          {{ object.username}}
+        </h1>
+        <div class="col-md-9">
+          <p>{{object.bio}}</p>
+        </div>
+        <p><i class="bi bi-geo"></i> {{object.location}}</p>
+      </div>
+      <div class="col-md-2">
+        {% if request.user.is_authenticated %}
+        <a href="{% url 'apps:users:user_update' 1 %}">
+          <button type="button a" class="btn btn-danger">Edit/Add Info</button>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+    <div class="row">
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Email:</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+              {{object.email}}
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Got It!</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 text-center">
+        <button type="button" class="btn btn-danger btn-lg" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          Contact
+        </button>
+      </div>
+        <div class="row justify-content-center gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row cols-xl-4">
+          {%for item in object.items.all%}
+          <div class="col mb-5">
+            <!--Product 1 on Grid-->
+            <div class="card">
+              <div class="">
+                <a href="{% url 'apps:listing:detail' item.id %}"><img class="card-img-top" src=" {{ item.photo.url }}"
+                    width="300" height="300" /></a>
+              </div>
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <div class="fw-bolder">{{item.item_name}}</div>
+                  <div class="">${{item.price}}</div>
+                </div>
+              </div>
+              <div>
+                <div class="card-footer pt-0 p-4 border-top-0 bg-transparent">
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+    </div>
+  </form>
+</div>
 {%endblock content%}

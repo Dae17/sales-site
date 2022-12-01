@@ -37,11 +37,7 @@
           <a class="nav-link" href="{% url 'apps:listing:create' %}"><i class="bi bi-plus-circle"></i> List Item</a>
         </li> -->
         {% if user.is_authenticated %} 
-       
-        
-
         <li class="nav-item"><a class="nav-link" href="{% url 'apps:users:user-detail' username=user.username %}" ><i class="bi bi-person-circle"></i>Hello, {{ user.username }} </a></li>
-        <li class="nav-item"><a class="nav-link" href=""><i class="bi bi-bag-plus"></i> Saved</a> </li>
         <li class="nav-item"><a class="nav-link" href="{% url 'apps:listing:create' %}"><i class="bi bi-plus-circle"></i>  List Item</a></li>
         <li class="nav-item"><a class="nav-link" href="{% url 'apps:users:logout' %}">Log Out</a></li>
         {% else %}
